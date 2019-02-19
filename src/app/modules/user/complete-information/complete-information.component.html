@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col">
+      <h2>Completar registro</h2>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row align-items-center mt-4">
+    <div class="col align-self-center">
+      <div class="card" *ngIf="!showLogin">
+          <div class="card-header">
+            <strong>Completar registro</strong>
+            <!-- <small>Form</small> -->
+          </div>
+          <div class="card-body">
+            <form [formGroup]="ngForm">
+              <div class="row">
+                <div class="form-group col-6">
+                  <label for="name">Primer nombre</label>
+                  <input formControlName="firstName" type="text" class="form-control" id="name" placeholder="Ingrese su nombre">
+                </div>
+                <div class="form-group col-6">
+                  <label for="name">Segundo nombre</label>
+                  <input formControlName="secondName" type="text" class="form-control" id="name" placeholder="Ingrese su nombre">
+                </div>
+                <div class="form-group col-6">
+                  <label for="lastname">Apellido</label>
+                  <input formControlName="lastname" type="text" class="form-control" id="lastname" placeholder="Ingrese su apellido">
+                </div>
+                <div class="form-group col-6">
+                  <label for="rut">Rut</label>
+                  <input formControlName="rut" type="text" class="form-control" id="rut" placeholder="Ingrese su rut">
+                </div>
+              <!-- <div class="form-group col-6">
+                <label for="userType">Tipo</label>
+                <select formControlName="userType" name="userType" id="userType" class="form-control">
+                  <option value="" disabled>Seleccione si es propietario o arrendatario</option>
+                  <option value="OWNER">Propietario</option>
+                  <option value="LESSEE">Arrendatario</option>
+                </select>
+              </div> -->
+                <div class="form-group col-sm-12">
+                  <label for="address">Dirección</label>
+                  <input formControlName="address" type="text" class="form-control" id="address" placeholder="Ingrese su dirección">
+                </div>
+                <div class="form-group col-sm-6">
+                  <label for="email">Email</label>
+                  <input formControlName="email" type="text" class="form-control" id="email" placeholder="Ingrese su email">
+                </div>
+                <div class="form-group col-6">
+                  <label for="phone">Telefono</label>
+                  <input formControlName="phone" type="text" class="form-control" id="phone" placeholder="Ingrese su telefono">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 float-right text-right">
+                  <button type="button" (click)="getForm(ngForm.value)" class="btn btn-primary px-4">Registrarse</button>
+                </div> 
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
+    
+  </div>
+</div>

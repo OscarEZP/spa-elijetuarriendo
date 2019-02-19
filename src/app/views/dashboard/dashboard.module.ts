@@ -7,13 +7,18 @@ import { ButtonsModule } from 'ngx-bootstrap';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
+import { AlertModule } from 'ngx-bootstrap';
+
+
 @NgModule({
   imports: [
     FormsModule,
     DashboardRoutingModule,
     ChartsModule,
     BsDropdownModule,
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    AlertModule.forRoot(),
+
   ],
   declarations: [ DashboardComponent ]
 })

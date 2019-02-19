@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user.component';
 import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
+import { CompleteInformationComponent } from './complete-information/complete-information.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,10 @@ export const routes: Routes = [
         path: 'list/owners',
         component: ListComponent,
         data: { title: 'Lista de propietarios', slug: 'OWNER' }
+      },
+      {
+        path: 'complete-information',
+        component: CompleteInformationComponent,
       }
     ]
   },
