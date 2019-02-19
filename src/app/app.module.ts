@@ -17,8 +17,10 @@ import { DefaultLayoutComponent } from './containers';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
-import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
+// import { LoginComponent } from './modules/login/login.component';
+import { LoginComponent } from './modules/auth/login/login.component';
+
+import { RegisterComponent } from './modules/auth/register/register.component';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -36,9 +38,15 @@ import {
 import { AppRoutingModule } from './app.routing';
 
 // Import 3rd party components
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { TabsModule } from 'ngx-bootstrap/tabs';
+import { BsDropdownModule } from 'ngx-bootstrap';
+import { TabsModule } from 'ngx-bootstrap';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
 
 @NgModule({
   imports: [
@@ -52,7 +60,12 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule,
   ],
   declarations: [
     AppComponent,
@@ -60,12 +73,12 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  }],
+  }, FormBuilder],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

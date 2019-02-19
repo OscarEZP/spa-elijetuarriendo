@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CarouselConfig } from 'ngx-bootstrap/carousel';
+import { CarouselConfig } from 'ngx-bootstrap';
 
 @Component({
   templateUrl: 'carousels.component.html',   providers: [

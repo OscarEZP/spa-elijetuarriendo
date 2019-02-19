@@ -6,7 +6,7 @@ import { ButtonsComponent } from './buttons.component';
 import { BrandButtonsComponent } from './brand-buttons.component';
 
 // Dropdowns Component
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BsDropdownModule } from 'ngx-bootstrap';
 import { DropdownsComponent } from './dropdowns.component';
 
 // Buttons Routing
