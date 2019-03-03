@@ -6,15 +6,17 @@ import { UserRoutingModule } from './user.router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CompleteInformationComponent } from './complete-information/complete-information.component';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { UserService } from '../../services/user.service';
 
 @NgModule({
-  imports: [UserRoutingModule, FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [UserRoutingModule, AngularFireDatabaseModule, FormsModule, CommonModule, ReactiveFormsModule],
   declarations: [
     UserComponent,
     CreateComponent,
     ListComponent,
-    CompleteInformationComponent
+    CompleteInformationComponent,
   ],
-  providers: [],
+  providers: [UserService],
 })
 export class UserModule { }

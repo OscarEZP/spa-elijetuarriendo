@@ -2,6 +2,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { USER } from '../models/user.model';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable({
     providedIn: 'root'
@@ -10,17 +13,9 @@ export class AuthService {
   user: any;
   constructor(
     public afAuth: AngularFireAuth,
-    private router: Router) {
-    this.afAuth.authState.subscribe(user => {
-      if (user) {
-        this.user = user;
-        localStorage.setItem('currentUser', JSON.stringify(this.user));
-      } else {
-        localStorage.setItem('currentUser', null);
-        this.router.navigate(['login']);
-      }
-    });
-  }
+    private afs: AngularFirestore,
+    private afd: AngularFireDatabase,
+    private router: Router) { }
 
   doGoogleLogin() {
     return new Promise<any>((resolve, reject) => {
@@ -35,28 +30,6 @@ export class AuthService {
     });
   }
 
-  // tryRegister(value) {
-  //   this.authService.doRegister(value)
-  //   .then(res => {
-  //     console.log(res);
-  //     this.errorMessage = "";
-  //     this.successMessage = "Your account has been created";
-  //   }, err => {
-  //     console.log(err);
-  //     this.errorMessage = err.message;
-  //     this.successMessage = "";
-  //   })
-  // }
-
-  doRegister(value) {
-    return new Promise<any>((resolve, reject) => {
-      firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
-      .then(res => {
-        resolve(res);
-      }, err => reject(err));
-    });
-  }
-
   async  login(email:  string, password:  string) {
 
     try {
@@ -65,6 +38,19 @@ export class AuthService {
     } catch (e) {
         alert('Error!'  +  e.message);
     }
+  }
+
+  userLogin(key) {
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.user = user;
+        localStorage.setItem('currentUser', JSON.stringify( { user: this.user, key }));
+        this.router.navigateByUrl('/dashboard');
+      } else {
+        localStorage.setItem('currentUser', null);
+        this.router.navigate(['login']);
+      }
+    });
   }
 
 
@@ -77,5 +63,36 @@ export class AuthService {
   get isLoggedIn(): boolean {
     const  user  =  JSON.parse(localStorage.getItem('user'));
     return  user  !==  null;
+  }
+
+  emailSignUp(form) {
+    return this.afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(form.email, form.password)
+      .then(user => {
+        this.login(form.email, form.password);
+        return this.setUserDoc(user.user, form).then(res => {
+          this.userLogin(res.key);
+        });
+      })
+      .catch(error => this.handleError(error) );
+  }
+
+  private handleError(error) {
+    // console.error(error);
+    // this.user.update(error.message, 'error');
+    console.log(error, 'error');
+  }
+
+  private setUserDoc(user, form) {
+    const userRef = this.afd.list(`/users`);
+    const data = {
+      uid: user.uid,
+      email: user.email || null,
+      type: form.userType,
+      rut: form.rut,
+      infoComplete: false
+    };
+
+    return userRef.push(data);
+
   }
 }

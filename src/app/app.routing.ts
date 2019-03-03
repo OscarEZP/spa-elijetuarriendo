@@ -12,7 +12,7 @@ import { RegisterComponent } from './modules/auth/register/register.component';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   },
   {
@@ -64,7 +64,7 @@ export const routes: Routes = [
       },
       {
         path: 'dashboard',
-        loadChildren: './views/dashboard/dashboard.module#DashboardModule'
+        loadChildren: './modules/dashboard/dashboard.module#DashboardModule'
       },
       {
         path: 'icons',

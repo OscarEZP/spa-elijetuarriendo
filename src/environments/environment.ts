@@ -5,12 +5,12 @@
 
 export const environment = {
   production: false,
-  firebaseConfig: {
-    apiKey: 'AIzaSyB50HPZxCKU5Ioj1Sbgj3v3lH2zI91rMQk',
-    authDomain: 'elijetuarriendo.firebaseapp.com',
-    databaseURL: 'https://elijetuarriendo.firebaseio.com',
-    projectId: 'elijetuarriendo',
-    storageBucket: 'elijetuarriendo.appspot.com',
-    messagingSenderId: '410190755864'
+  firebase: {
+    apiKey: 'AIzaSyB_LpGFCaOJCwz2yVzeX0l4Ui2I0DpMmGE',
+    authDomain: 'neatwebplatform.firebaseapp.com',
+    databaseURL: 'https://neatwebplatform.firebaseio.com',
+    projectId: 'neatwebplatform',
+    storageBucket: 'neatwebplatform.appspot.com',
+    messagingSenderId: '594414251342'
   }
 };

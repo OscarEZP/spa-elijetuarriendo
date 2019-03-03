@@ -47,6 +47,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 @NgModule({
   imports: [
@@ -63,9 +64,10 @@ import { environment } from '../environments/environment';
     ChartsModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   declarations: [
     AppComponent,
