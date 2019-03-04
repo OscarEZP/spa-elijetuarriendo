@@ -38,22 +38,27 @@ export class CompleteInformationComponent implements OnInit {
       address: [userInformation ? userInformation.address : null, Validators.required],
       email: [userInformation ? userInformation.email : null, Validators.required],
       phone: [userInformation ? userInformation.phone : null, Validators.required],
-      userType: [userInformation ? userInformation.type : null],
+      type: [userInformation ? userInformation.type : null],
       infoComplete: [true]
     });
   }
 
   getUserInformation() {
-    this.userService.getUser(this.currentUser.key)
-      .subscribe(res => {
-        this.buildForm(res);
+    this.userService.getUsersByEmail(this.currentUser.user.email)
+      .subscribe((res: any) => {
+        this.user = res.find(f => {
+          if (f.data.email === this.currentUser.user.email) {
+            return f;
+          }
+        });
+        this.buildForm(this.user.data);
       }, error => {
         console.log(error, 'error');
       });
   }
 
   getForm(form: any) {
-    this.userService.updateUser(this.currentUser.key, form);
+    this.userService.updateUser(this.user.key, form);
     // this.ngForm.reset();
   }
 

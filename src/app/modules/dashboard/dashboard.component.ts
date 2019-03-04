@@ -20,10 +20,14 @@ export class DashboardComponent implements OnInit {
   }
 
   getUserLogin() {
-    this.userService.getUser(this.currentUser.key)
-      .subscribe(res => {
-        console.log(res, 'user');
-        this.userLogin = res;
+    this.userService.getUsersByEmail(this.currentUser.user.email)
+      .subscribe((res: any) => {
+        this.userLogin = res.find(f => {
+          if (f.data.email === this.currentUser.user.email) {
+            return f;
+          }
+        });
+        console.log(this.userLogin, 'login');
       }, error => {
         console.log(error);
       });

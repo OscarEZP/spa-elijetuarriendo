@@ -8,6 +8,7 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './modules/auth/login/login.component';
 import { RegisterComponent } from './modules/auth/register/register.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -41,7 +42,7 @@ export const routes: Routes = [
     component: RegisterComponent,
     data: {
       title: 'Register Page'
-    }
+    },
   },
   {
     path: '',
@@ -64,7 +65,7 @@ export const routes: Routes = [
       },
       {
         path: 'dashboard',
-        loadChildren: './modules/dashboard/dashboard.module#DashboardModule'
+        loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
       },
       {
         path: 'icons',
@@ -84,7 +85,7 @@ export const routes: Routes = [
       },
       {
         path: 'users',
-        loadChildren: './modules/user/user.module#UserModule'
+        loadChildren: './modules/user/user.module#UserModule',
       },
       {
         path: 'auth',

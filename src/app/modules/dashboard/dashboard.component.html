@@ -1,3 +1,3 @@
-<app-lesse *ngIf="userLogin && userLogin.type === 'LESSEE'"></app-lesse>
+<app-lesse *ngIf="userLogin && userLogin.data.type === 'LESSEE'"></app-lesse>
 
-<app-owner *ngIf="userLogin && userLogin.type === 'OWNER'"></app-owner>
+<app-owner *ngIf="userLogin && userLogin.data.type === 'OWNER'"></app-owner>

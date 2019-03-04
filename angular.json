@@ -17,7 +17,9 @@
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
             "assets": [
-              "src/assets"
+              "src/assets",
+              "src/assets/firebase-messaging-sw.js",
+              "src/assets/manifest.json"
             ],
             "styles": [
               "node_modules/@coreui/icons/css/coreui-icons.css",
@@ -91,7 +93,9 @@
             },
             "assets": [
               "src/assets",
-              "src/favicon.ico"
+              "src/favicon.ico",
+              "src/assets/firebase-messaging-sw.js",
+              "src/assets/manifest.json"
             ]
           }
         },

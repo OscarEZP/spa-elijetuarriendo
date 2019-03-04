@@ -30,13 +30,19 @@ export class AuthService {
     });
   }
 
-  async  login(email:  string, password:  string) {
+  async login(email:  string, password:  string) {
 
     try {
-        await  this.afAuth.auth.signInWithEmailAndPassword(email, password);
-        this.router.navigate(['dashboard']);
+      await  this.afAuth.auth.signInWithEmailAndPassword(email, password)
+        .then(res => {
+          this.userLogin(res.user.uid);
+          this.router.navigate(['dashboard']);
+        }, error => {
+          console.log('error');
+        });
+
     } catch (e) {
-        alert('Error!'  +  e.message);
+      alert('Error!'  +  e.message);
     }
   }
 
@@ -56,7 +62,7 @@ export class AuthService {
 
   async logout() {
     await this.afAuth.auth.signOut();
-    localStorage.removeItem('user');
+    localStorage.removeItem('currentUser');
     this.router.navigate(['dashboard']);
   }
 

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy, AsyncPipe } from '@angular/common';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -48,6 +48,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { MessagingService } from './services/messaging.service';
 
 @NgModule({
   imports: [
@@ -67,7 +68,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
   ],
   declarations: [
     AppComponent,
@@ -80,7 +81,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  }, FormBuilder],
+  }, FormBuilder,
+  MessagingService, AsyncPipe],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
