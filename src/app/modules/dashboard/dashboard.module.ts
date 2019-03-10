@@ -5,13 +5,14 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { ButtonsModule } from 'ngx-bootstrap';
 
-import { DashboardComponent } from './dashboard.component';
+import { DashboardComponent, ModalContentComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
 import { AlertModule } from 'ngx-bootstrap';
 import { OwnerComponent } from './owner/owner.component';
 import { LesseComponent } from './lesse/lesse.component';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { UploadFilesComponent } from '../upload-files/upload-files.component';
 
 @NgModule({
   imports: [
@@ -22,8 +23,9 @@ import { LesseComponent } from './lesse/lesse.component';
     BsDropdownModule,
     ButtonsModule.forRoot(),
     AlertModule.forRoot(),
-
+    ModalModule.forRoot()
   ],
-  declarations: [ DashboardComponent, OwnerComponent, LesseComponent ]
+  declarations: [ DashboardComponent, OwnerComponent, LesseComponent, ModalContentComponent, UploadFilesComponent ],
+  entryComponents: [ModalContentComponent, UploadFilesComponent]
 })
 export class DashboardModule { }
