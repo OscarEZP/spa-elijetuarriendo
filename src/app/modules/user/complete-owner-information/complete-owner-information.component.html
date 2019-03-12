@@ -1,0 +1,128 @@
+<form [formGroup]="ngForm">
+  <div class="row">
+    <div class="form-group col-6">
+      <label for="name">Foto carnet (frontal)</label>
+      <input formControlName="fileFrontRut" type="file" class="form-control" id="name" (change)="detectFiles($event, 'fileFrontRut')">
+    </div>
+    <div class="form-group col-6">
+      <label for="rut">Foto carnet (trasera)</label>
+      <input formControlName="fileBackRut" type="file" class="form-control" id="rut" (change)="detectFiles($event, 'fileBackRut')">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-6">
+      <label for="userType">Certificado de dominio</label>
+      <input formControlName="fileDomainCertificate" type="file" class="form-control" (change)="detectFiles($event, 'fileDomainCertificate')">
+    </div>
+    <div class="form-group col-sm-6">
+      <label for="address">Certificado de hipotecas gravámenes y proviciones</label>
+      <input formControlName="fileMortgageCertificate" type="file" class="form-control" (change)="detectFiles($event, 'fileMortgageCertificate')">
+    </div>
+  </div>
+  <div class="row">
+    <div class="card col-12">
+      <div class="card-header">
+        <div class="row">
+          <div class="col align-self-start">
+            <strong>Arriendos pasados</strong>
+          </div>
+          <div class="col text-right">
+            <button class="btn btn-primary" (click)="lgModal.show()">Agregar otro <span class="fa fa-plus"></span></button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row mb-2">
+          <div class="col-12">
+            <ul class="list-group" *ngFor="let list of pastLeaseList">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="col">
+                  <strong>Dirección y contacto</strong>
+                </div>
+                <div class="col">
+                  {{list.commune}}, {{list.street}}, {{list.depto}}
+                </div>
+                <div class="col">
+                  {{list.name}}, {{list.email}}, {{list.phone}}
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>       
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="row">
+  <div class="col-12 float-right text-right">
+    <button type="button" (click)="getForm(ngForm.value)" class="btn btn-primary px-4">Siguiente <i class="fa fa-arrow-right"></i></button>
+  </div> 
+</div>
+
+
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1"
+     role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left">Añadir Arriendo pasado</h4>
+        <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <strong>Arriendo pasado</strong>
+            </div>
+            <div class="card-body">
+              <div class="col-12">
+                <form [formGroup]="pastLeaseForm">
+                  <div class="row">
+                    <h5 class="col-12">Dirección</h5>
+                    <div class="col form-group">
+                      <label for="commune">Comuna</label>
+                      <input formControlName="commune" id="commune" type="text" class="form-control">
+                    </div>
+                    <div class="col form-group">
+                      <label for="street">Calle</label>
+                      <input formControlName="street" id="street" type="text" class="form-control">
+                    </div>
+                    <div class="col form-group">
+                      <label for="depto">Depto</label>
+                      <input formControlName="depto" id="depto" type="text" class="form-control">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <h5 class="col-12">Contacto</h5>
+                    <div class="col form-group">
+                      <label for="name">Nombre</label>
+                      <input formControlName="name" id="name" type="text" class="form-control">
+                    </div>
+                    <div class="col form-group">
+                      <label for="email">Email</label>
+                      <input formControlName="email" id="email" type="text" class="form-control">
+                    </div>
+                    <div class="col form-group">
+                      <label for="phone">Telefono</label>
+                      <input formControlName="phone" id="phone" type="text" class="form-control">
+                    </div>
+                  </div>
+                  
+                </form>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="col-12 text-right">
+          <button class="btn btn-primary" (click)="postPastLease(); lgModal.hide()">Añadir arriendo pasado</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

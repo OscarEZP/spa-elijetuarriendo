@@ -22,6 +22,9 @@ import { LoginComponent } from './modules/auth/login/login.component';
 
 import { RegisterComponent } from './modules/auth/register/register.component';
 
+import { AngularFireStorageModule } from 'angularfire2/storage';
+
+
 const APP_CONTAINERS = [
   DefaultLayoutComponent
 ];
@@ -50,6 +53,7 @@ import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { MessagingService } from './services/messaging.service';
 import { UploadFilesComponent } from './modules/upload-files/upload-files.component';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   imports: [
@@ -70,6 +74,8 @@ import { UploadFilesComponent } from './modules/upload-files/upload-files.compon
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    ComponentsModule,
+    AngularFireStorageModule
   ],
   declarations: [
     AppComponent,

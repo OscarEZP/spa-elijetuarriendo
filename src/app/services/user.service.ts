@@ -52,4 +52,8 @@ export class UserService {
     this.userRef.remove();
   }
 
+  saveDocumentsUser(uid: string, data: any) {
+    return this.db.object(`users/${uid}/documents/${data.type}`).update(data);
+  }
+
 }

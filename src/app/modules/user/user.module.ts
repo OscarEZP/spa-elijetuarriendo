@@ -8,15 +8,31 @@ import { CommonModule } from '@angular/common';
 import { CompleteInformationComponent } from './complete-information/complete-information.component';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { UserService } from '../../services/user.service';
+import { Ng2Rut } from 'ng2-rut';
+import { CompleteOwnerInformationComponent } from './complete-owner-information/complete-owner-information.component';
+import { ModalModule } from 'ngx-bootstrap';
+import { MessageService } from '../../services/message.service';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
-  imports: [UserRoutingModule, AngularFireDatabaseModule, FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    UserRoutingModule,
+    AngularFireDatabaseModule,
+    FormsModule,
+    CommonModule,
+    ReactiveFormsModule,
+    Ng2Rut,
+    ModalModule.forRoot(),
+    ComponentsModule,
+  ],
   declarations: [
     UserComponent,
     CreateComponent,
     ListComponent,
     CompleteInformationComponent,
+    CompleteOwnerInformationComponent,
   ],
-  providers: [UserService],
+  providers: [UserService, MessageService],
 })
 export class UserModule { }

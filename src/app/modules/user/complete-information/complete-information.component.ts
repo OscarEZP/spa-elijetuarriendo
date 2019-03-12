@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { map } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { UserService } from '../../../services/user.service';
+import { RutValidator } from 'ng2-rut';
 
 @Component({
   selector: 'app-complete-information',
@@ -16,12 +16,16 @@ export class CompleteInformationComponent implements OnInit {
   currentUser: any;
   user: any;
   list: AngularFireList<Observable<any>[]>;
+  firstData: Boolean = true;
+  secondData: Boolean = false;
+
 
   constructor(
     private fb: FormBuilder,
     public afd: AngularFireDatabase,
     public afs: AngularFirestore,
-    private userService: UserService
+    private userService: UserService,
+    private rutValidator: RutValidator
   ) { }
 
   ngOnInit() {
@@ -34,7 +38,7 @@ export class CompleteInformationComponent implements OnInit {
   buildForm(userInformation?) {
     this.ngForm = this.fb.group({
       name: [userInformation ? userInformation.name : null, Validators.required],
-      rut: [userInformation ? userInformation.rut : null, Validators.required],
+      rut: [userInformation ? userInformation.rut : null, [Validators.required, this.rutValidator]],
       address: [userInformation ? userInformation.address : null, Validators.required],
       email: [userInformation ? userInformation.email : null, Validators.required],
       phone: [userInformation ? userInformation.phone : null, Validators.required],
@@ -59,7 +63,8 @@ export class CompleteInformationComponent implements OnInit {
 
   getForm(form: any) {
     this.userService.updateUser(this.user.key, form);
-    // this.ngForm.reset();
+    this.firstData = false;
+    this.secondData = true;
   }
 
 }
