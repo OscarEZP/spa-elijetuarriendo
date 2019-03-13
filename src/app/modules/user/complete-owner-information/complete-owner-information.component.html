@@ -1,22 +1,36 @@
 <form [formGroup]="ngForm">
   <div class="row">
-    <div class="form-group col-6">
+    <div class="form-group col-6" *ngIf="settingsForm.fileFrontRut">
       <label for="name">Foto carnet (frontal)</label>
       <input formControlName="fileFrontRut" type="file" class="form-control" id="name" (change)="detectFiles($event, 'fileFrontRut')">
     </div>
-    <div class="form-group col-6">
+    <div class="form-group col-6" *ngIf="settingsForm.fileBackRut">
       <label for="rut">Foto carnet (trasera)</label>
       <input formControlName="fileBackRut" type="file" class="form-control" id="rut" (change)="detectFiles($event, 'fileBackRut')">
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-6">
+    <div class="form-group col-6" *ngIf="settingsForm.fileDomainCertificate">
       <label for="userType">Certificado de dominio</label>
       <input formControlName="fileDomainCertificate" type="file" class="form-control" (change)="detectFiles($event, 'fileDomainCertificate')">
     </div>
-    <div class="form-group col-sm-6">
+    <div class="form-group col-sm-6" *ngIf="settingsForm.fileMortgageCertificate">
       <label for="address">Certificado de hipotecas gravámenes y proviciones</label>
       <input formControlName="fileMortgageCertificate" type="file" class="form-control" (change)="detectFiles($event, 'fileMortgageCertificate')">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-4" *ngIf="settingsForm.fileRecords">
+      <label for="userType">Antecedentes</label>
+      <input formControlName="fileRecords" type="file" class="form-control" (change)="detectFiles($event, 'fileRecords')">
+    </div>
+    <div class="form-group col-sm-4" *ngIf="settingsForm.fileEquifax">
+      <label for="address">Equifax</label>
+      <input formControlName="fileEquifax" type="file" class="form-control" (change)="detectFiles($event, 'fileEquifax')">
+    </div>
+    <div class="form-group col-sm-4" *ngIf="settingsForm.fileEviction">
+      <label for="address">Desalojos</label>
+      <input formControlName="fileEviction" type="file" class="form-control" (change)="detectFiles($event, 'fileEviction')">
     </div>
   </div>
   <div class="row">
@@ -56,7 +70,7 @@
 
 <div class="row">
   <div class="col-12 float-right text-right">
-    <button type="button" (click)="getForm(ngForm.value)" class="btn btn-primary px-4">Siguiente <i class="fa fa-arrow-right"></i></button>
+    <button type="button" (click)="getForm(ngForm.value)" class="btn btn-primary px-4">Guardar</button>
   </div> 
 </div>
 
@@ -120,7 +134,7 @@
       </div>
       <div class="modal-footer">
         <div class="col-12 text-right">
-          <button class="btn btn-primary" (click)="postPastLease(); lgModal.hide()">Añadir arriendo pasado</button>
+          <button class="btn btn-primary" [disabled]="!pastLeaseForm.valid" (click)="postPastLease(); lgModal.hide()">Añadir arriendo pasado</button>
         </div>
       </div>
     </div>

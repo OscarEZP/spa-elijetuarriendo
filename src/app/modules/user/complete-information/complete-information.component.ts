@@ -18,8 +18,8 @@ export class CompleteInformationComponent implements OnInit {
   list: AngularFireList<Observable<any>[]>;
   firstData: Boolean = true;
   secondData: Boolean = false;
-
-
+  ngFormUploads: FormGroup;
+  settingsFormUpload = {};
   constructor(
     private fb: FormBuilder,
     public afd: AngularFireDatabase,
@@ -33,6 +33,7 @@ export class CompleteInformationComponent implements OnInit {
     this.userService.getUsersList();
     this.buildForm();
     this.getUserInformation();
+    this.buildFormUploads();
   }
 
   buildForm(userInformation?) {
@@ -47,6 +48,19 @@ export class CompleteInformationComponent implements OnInit {
     });
   }
 
+  buildFormUploads(userInformation?) {
+    this.ngFormUploads = this.fb.group({
+      fileFrontRut: [null],
+      fileBackRut: [null],
+      fileDomainCertificate: [null],
+      fileMortgageCertificate: [null],
+      fileRecords: [null],
+      fileEquifax: [null],
+      fileEviction: [null],
+      pastLeases: [userInformation && userInformation.pastLeases.length > 0 ? userInformation.pastLeases : []]
+    });
+  }
+
   getUserInformation() {
     this.userService.getUsersByEmail(this.currentUser.user.email)
       .subscribe((res: any) => {
@@ -56,6 +70,7 @@ export class CompleteInformationComponent implements OnInit {
           }
         });
         this.buildForm(this.user.data);
+        this.buildFormUploads(this.user.data);
       }, error => {
         console.log(error, 'error');
       });
@@ -63,6 +78,37 @@ export class CompleteInformationComponent implements OnInit {
 
   getForm(form: any) {
     this.userService.updateUser(this.user.key, form);
+    if (form.type === 'OWNER') {
+      this.settingsFormUpload = {
+        fileFrontRut: true,
+        fileBackRut: true,
+        fileDomainCertificate: true,
+        fileMortgageCertificate: true,
+        fileRecords: false,
+        fileEquifax: false,
+        fileEviction: false,
+      };
+    } else if (form.type === 'LESSEE') {
+      this.settingsFormUpload = {
+        fileFrontRut: true,
+        fileBackRut: true,
+        fileDomainCertificate: false,
+        fileMortgageCertificate: false,
+        fileRecords: true,
+        fileEquifax: true,
+        fileEviction: true,
+      };
+    } else {
+      this.settingsFormUpload = {
+        fileFrontRut: true,
+        fileBackRut: true,
+        fileDomainCertificate: true,
+        fileMortgageCertificate: true,
+        fileRecords: true,
+        fileEquifax: true,
+        fileEviction: true,
+      };
+    }
     this.firstData = false;
     this.secondData = true;
   }

@@ -6,10 +6,11 @@ import { Observable, from, combineLatest } from 'rxjs';
 import { UserService } from '../../../services/user.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { MessageService } from '../../../services/message.service';
-import { UploadClass } from '../../upload-files/upload-class';
+
 import { UploadService } from '../../../services/upload.service';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { finalize, filter, switchMap } from 'rxjs/operators';
+import { UploadClass } from '../../../models/upload.model';
 
 @Component({
   selector: 'app-complete-owner-information',
@@ -17,7 +18,7 @@ import { finalize, filter, switchMap } from 'rxjs/operators';
   styleUrls: ['./complete-owner-information.component.scss'],
 })
 export class CompleteOwnerInformationComponent implements OnInit {
-  ngForm: FormGroup;
+  @Input() ngForm: FormGroup;
   pastLeaseForm: FormGroup;
   bsModalRef: BsModalRef;
   pastLeaseList: any[] = [];
@@ -26,6 +27,7 @@ export class CompleteOwnerInformationComponent implements OnInit {
   uploadURL: any;
   downloadURLs: any = [];
   uploads: any[] = [];
+  @Input() settingsForm;
 
   constructor(
     private fb: FormBuilder,
@@ -37,29 +39,19 @@ export class CompleteOwnerInformationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.buildForm();
+    this.pastLeaseList = this.userData.data.pastLeases && this.userData.data.pastLeases.length > 0 ? this.userData.data.pastLeases : [];
     this.buildFormPastLease();
-    console.log(this.userData, 'user data');
-  }
-
-  buildForm() {
-    this.ngForm = this.fb.group({
-      fileFrontRut: [null],
-      fileBackRut: [null],
-      fileDomainCertificate: [null],
-      fileMortgageCertificate: [null],
-      pastLeases: []
-    });
+    console.log(this.settingsForm, this.ngForm, 'settings');
   }
 
   buildFormPastLease() {
     this.pastLeaseForm = this.fb.group({
-      commune: null,
-      street: null,
-      depto: null,
-      name: null,
-      phone: null,
-      email: null
+      commune: [null, Validators.required],
+      street: [null, Validators.required],
+      depto: [null, Validators.required],
+      name: [null, Validators.required],
+      phone: [null, Validators.required],
+      email: [null, Validators.required]
     });
   }
 
@@ -69,9 +61,13 @@ export class CompleteOwnerInformationComponent implements OnInit {
       fileFrontRut: this.sendFile(this.arrayFiles.find(f => f.type === 'fileFrontRut')),
       fileBackRut: this.sendFile(this.arrayFiles.find(f => f.type === 'fileBackRut')),
       fileDomainCertificate: this.sendFile(this.arrayFiles.find(f => f.type === 'fileDomainCertificate')),
-      fileMortgageCertificate: this.sendFile(this.arrayFiles.find(f => f.type === 'fileMortgageCertificate'))
-    };
+      fileMortgageCertificate: this.sendFile(this.arrayFiles.find(f => f.type === 'fileMortgageCertificate')),
+      fileRecords: this.sendFile(this.arrayFiles.find(f => f.type === 'fileRecords')),
+      fileEquifax: this.sendFile(this.arrayFiles.find(f => f.type === 'fileEquifax')),
+      fileEviction: this.sendFile(this.arrayFiles.find(f => f.type === 'fileEviction'))
 
+    };
+    this.userService.updateUser(this.userData.key, { pastLeases: form.pastLeases });
   }
 
   postPastLease() {

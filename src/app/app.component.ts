@@ -5,7 +5,7 @@ import { MessagingService } from './services/messaging.service';
 @Component({
   // tslint:disable-next-line
   selector: 'body',
-  template: '<router-outlet></router-outlet>; {{ message | async | json }} '
+  template: '<router-outlet></router-outlet>;'
 })
 export class AppComponent implements OnInit {
   message;
