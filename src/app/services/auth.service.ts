@@ -50,6 +50,7 @@ export class AuthService {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.user = user;
+        this.user.sendEmailVerification();
         localStorage.setItem('currentUser', JSON.stringify( { user: this.user, key }));
         this.router.navigateByUrl('/dashboard');
       } else {

@@ -52,8 +52,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { MessagingService } from './services/messaging.service';
-import { UploadFilesComponent } from './modules/upload-files/upload-files.component';
 import { ComponentsModule } from './components/components.module';
+
 
 @NgModule({
   imports: [

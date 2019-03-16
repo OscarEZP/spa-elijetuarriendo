@@ -12,7 +12,6 @@ import { AlertModule } from 'ngx-bootstrap';
 import { OwnerComponent } from './owner/owner.component';
 import { LesseComponent } from './lesse/lesse.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { UploadFilesComponent } from '../upload-files/upload-files.component';
 
 @NgModule({
   imports: [
@@ -25,7 +24,11 @@ import { UploadFilesComponent } from '../upload-files/upload-files.component';
     AlertModule.forRoot(),
     ModalModule.forRoot()
   ],
-  declarations: [ DashboardComponent, OwnerComponent, LesseComponent, ModalContentComponent, UploadFilesComponent ],
-  entryComponents: [ModalContentComponent, UploadFilesComponent]
+  declarations: [ DashboardComponent,
+    OwnerComponent,
+    LesseComponent,
+    ModalContentComponent,
+  ],
+  entryComponents: [ModalContentComponent]
 })
 export class DashboardModule { }

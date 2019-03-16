@@ -10,7 +10,8 @@ export class DashboardComponent implements OnInit {
   currentUser: any;
   userLogin: any;
 
-  constructor(private userService: UserService, private modalService: BsModalService) {}
+  constructor(private userService: UserService,
+    private modalService: BsModalService) {}
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));

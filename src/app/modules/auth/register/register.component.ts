@@ -10,7 +10,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
   ngForm: FormGroup;
@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private afAuth: AngularFireAuth,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
   ) {
     this.user = this.afAuth.authState
       .subscribe(user => {
@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
 
   buildForm() {
     this.ngForm = this.fb.group({
-      rut: [null, Validators.required],
+      rut: [null, Validators.required ],
       userType: [null, Validators.required],
       email: [null, Validators.required],
       password: [null, Validators.required],

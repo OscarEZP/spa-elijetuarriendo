@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row align-items-center mt-4">
     <div class="col align-self-center">
-      <div class="card" *ngIf="!showLogin">
+      <div class="card" >
           <div class="card-header">
             <strong>Registrarse</strong>
             <!-- <small>Form</small> -->
@@ -9,25 +9,24 @@
           <div class="card-body">
             <form [formGroup]="ngForm">
               <div class="row">
-                <div class="form-group col-6">
+                <!-- <div class="form-group col-6">
                   <label for="userType">Tipo</label>
                   <select formControlName="userType" name="userType" id="userType" class="form-control">
                     <option value="" disabled>Seleccione si es propietario o arrendatario</option>
                     <option value="OWNER">Propietario</option>
                     <option value="LESSEE">Arrendatario</option>
                   </select>
-                  <!-- <input type="text" class="form-control" id="street" placeholder="Seleccione si es propietario o arrendatario"> -->
-                </div>
-                <div class="form-group col-sm-6">
+                </div> -->
+                <div class="form-group col">
                   <label for="email">Email</label>
                   <input formControlName="email" type="text" class="form-control" id="email" placeholder="Ingrese su email">
                 </div>
-              </div>
-              <div class="row">
                 <div class="form-group col">
                   <label for="rut">Rut</label>
-                  <input formControlName="rut" type="text" class="form-control" id="rut" placeholder="Ingrese su rut">
+                  <input formControlName="rut" formatRut validateRut type="text" class="form-control" id="rut" placeholder="Ingrese su rut">
                 </div>
+              </div>
+              <div class="row">
                 <div class="form-group col">
                   <label for="password">Passsword</label>
                   <input formControlName="password" type="password" class="form-control" id="password" placeholder="Ingrese su password">

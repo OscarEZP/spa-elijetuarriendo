@@ -1,22 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login/login.component';
 import { AuthComponent } from './auth.component';
 import { AuthRoutingModule } from './auth.router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { RegisterComponent } from './register/register.component';
+import { Ng2Rut } from 'ng2-rut';
 
 @NgModule({
   imports: [
     FormsModule,
     CommonModule,
     AuthRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng2Rut
   ],
   declarations: [
   AuthComponent,
-  LoginComponent,
-  RegisterComponent
 ],
   providers: [],
 })

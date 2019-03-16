@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
-import { UploadClass } from '../modules/upload-files/upload-class';
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireStorage } from 'angularfire2/storage';
+import { UploadClass } from '../models/upload.model';
 
 @Injectable({
   providedIn: 'root'
